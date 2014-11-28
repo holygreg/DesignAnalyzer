@@ -1,0 +1,67 @@
+package Design;
+
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.StringTokenizer;
+
+public class PatrickTest {
+	
+	public static void main(String[] args){
+		System.out.println("Start beginnt!");
+		PatrickTest pT = new PatrickTest();
+		pT.start();
+	    }
+	
+	public void start(){
+		String str = deleteComments(File2String("C:\\Users\\Patrick\\Documents\\Workspace\\oj10cyte-ace-prak1\\README.txt"));
+		StringTokenizer inputFile = new StringTokenizer(str);
+		while(inputFile.hasMoreTokens()){
+		System.out.println(inputFile.nextToken());
+		}
+	}
+	
+	//Was ist das hier?
+	@SuppressWarnings("resource")
+	private String File2String(String file) {
+		BufferedReader buffFile = null;
+		try {
+			buffFile = new BufferedReader(new FileReader(file));
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			System.out.println("File \"" + file + "\" not readable!");
+			System.exit(0);
+		}
+		StringBuffer strBuff = new StringBuffer();
+		int temp = -1;
+		try {
+			while ((temp = buffFile.read()) != -1) {
+				strBuff.append((char) temp);
+			}
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			System.out.println("File not readable");
+			System.exit(0);
+		}
+		return strBuff.toString();
+	}
+	
+	private String deleteComments(String text){
+		StringBuffer strBuff = new StringBuffer();
+		int pointA =0; 
+		int pointB =0;
+		while(text.indexOf("#",pointA)!=-1){ 
+			pointB=text.indexOf("#",pointA)-1;
+			//Text in Buffer laden
+			strBuff.append(text.substring(pointA, pointB));
+			//neuer Anfangspunkt festlegen
+			pointA = text.indexOf("\n",pointB+1);
+		}
+		strBuff.append(text.substring(pointA));
+		
+		return strBuff.toString();
+	}
+	
+	
+}

@@ -1,0 +1,22 @@
+Hi Patrick,
+ich hab mir gedacht, ich schreibe hier nochmal kurz auf, wie ich mir das mit dem Überprüfen der Überlappungen gedacht habe, 
+nur, damit wir nicht beide am Ende unterschiedliche Ideen im Kopf haben:
+
+In der Check...Methode:
+
+Für jeden Aufruf:
+
+1. Überprüfe ob übergebene Koordinaten an einer "gültigen" Position sind. (Auf dem Chip und z.B nicht auf Pos (0,0) etc.)
+2. Prüfe, ob in der Positionsliste bereits ein Position-Element vorhanden ist
+	2.1 Falls nicht-einfach Positionelement erzeugen, mit Chip-Element am entsprechenden Subblock und in Positios-Liste einfügen.
+	    Außerdem das Chip-Element mit dem Namen als Key in Chip-Elements-HashMap einfügen
+	2.2 Falls Position bereits besetzt, mit Position.setSubblock1 bzw 2 versuchen, ChipElement an den Subblock zu setzen. 
+	    Falls setSubblock false liefert---->Fehler, weil Subblock bereits besetzt/Overlap. Ansonsten ChipElement auch noch in die ChipElement-Liste einfügen
+
+
+Das ist so mein Konzept. Falls du das aber anders machen willst, bzw. ne bessere Idee hast oder einen Denkfehler von mir findest,
+kannst du mir ja einfach bescheit geben.
+
+LG,
+
+Gregor

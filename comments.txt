@@ -1,0 +1,15 @@
+private String deleateKomments(String text){
+		StringBuffer blifString = new StringBuffer();
+		int pointA =0; 
+		int pointB =0;
+		while(text.indexOf("#",pointA)!=-1){ 
+			pointB=text.indexOf("#",pointA)-1;
+			//Text in Buffer laden
+			blifString.append(text.substring(pointA, pointB));
+			//neuer Anfangspunkt festlegen
+			pointA = text.indexOf("\n",pointB+1);
+		}
+		blifString.append(text.substring(pointA));
+		
+		return blifString.toString();
+	}

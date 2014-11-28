@@ -1,0 +1,44 @@
+.global clock
+
+.input s27_in_2_
+pinlist: s27_in_2_ 
+
+.input s27_in_1_
+pinlist: s27_in_1_ 
+
+.input s27_in_3_
+pinlist: s27_in_3_ 
+
+.input s27_in_0_
+pinlist: s27_in_0_ 
+
+.input clock
+pinlist: clock 
+
+.output out:s27_out
+pinlist: s27_out 
+
+.clb s27_out  # Only LUT used.
+pinlist: s27_in_3_ n_n41 n_n42 [13] s27_out open 
+subblock: s27_out 0 1 2 3 4 open 
+
+.clb n_n40  # Both LUT and LATCH used.
+pinlist: s27_in_1_ s27_in_3_ [13] [11] n_n40 clock 
+subblock: n_n40 0 1 2 3 4 5 
+
+.clb n_n41  # Both LUT and LATCH used.
+pinlist: s27_in_3_ [13] open open n_n41 clock 
+subblock: n_n41 0 1 open open 4 5 
+
+.clb n_n42  # Both LUT and LATCH used.
+pinlist: s27_in_3_ n_n42 [13] open n_n42 clock 
+subblock: n_n42 0 1 2 open 4 5 
+
+.clb [13]  # Only LUT used.
+pinlist: s27_in_2_ s27_in_0_ n_n40 n_n41 [13] open 
+subblock: [13] 0 1 2 3 4 open 
+
+.clb [11]  # Only LUT used.
+pinlist: s27_in_2_ n_n40 n_n41 open [11] open 
+subblock: [11] 0 1 2 open 4 open 
+
